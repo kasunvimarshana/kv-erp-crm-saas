@@ -203,8 +203,15 @@ final class TenantService implements TenantServiceInterface
     {
         $databaseName = $tenant->database_name;
 
-        // Create database using raw SQL
-        DB::statement("CREATE DATABASE {$databaseName}");
+        // Validate database name to prevent SQL injection
+        if (!preg_match('/^[a-zA-Z0-9_]+$/', $databaseName)) {
+            throw new \InvalidArgumentException('Invalid database name format');
+        }
+
+        // Create database using safe parameter binding
+        $connection = DB::connection()->getPdo();
+        $quotedDbName = $connection->quote($databaseName);
+        DB::statement("CREATE DATABASE {$quotedDbName}");
 
         Log::info("Tenant database created", [
             'tenant_id' => $tenant->id,

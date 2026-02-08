@@ -27,9 +27,11 @@ Route::prefix('v1/central')->middleware(['api'])->group(function () {
 
 // Tenant-scoped routes (requires tenant identification)
 Route::prefix('v1')->middleware(['api', 'tenant'])->group(function () {
-    // Organization Management
-    Route::apiResource('organizations', OrganizationController::class);
+    // Organization Management - custom routes first to prevent conflicts
     Route::get('organizations/roots', [OrganizationController::class, 'roots']);
-    Route::get('organizations/{id}/children', [OrganizationController::class, 'children']);
     Route::get('organizations/active', [OrganizationController::class, 'active']);
+    Route::get('organizations/{id}/children', [OrganizationController::class, 'children']);
+    
+    // Organization CRUD routes
+    Route::apiResource('organizations', OrganizationController::class);
 });
