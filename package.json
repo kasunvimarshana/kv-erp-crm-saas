@@ -1,0 +1,30 @@
+{
+    "name": "kv-erp-crm-saas",
+    "version": "1.0.0",
+    "description": "Enterprise-grade modular ERP SaaS platform",
+    "type": "module",
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "lint": "eslint resources/js --ext .js,.vue",
+        "lint:fix": "eslint resources/js --ext .js,.vue --fix"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^5.0.0",
+        "autoprefixer": "^10.4.19",
+        "axios": "^1.6.4",
+        "eslint": "^8.57.0",
+        "eslint-plugin-vue": "^9.22.0",
+        "laravel-vite-plugin": "^1.0.0",
+        "postcss": "^8.4.38",
+        "tailwindcss": "^3.4.1",
+        "vite": "^5.0.0"
+    },
+    "dependencies": {
+        "vue": "^3.4.21",
+        "vue-router": "^4.3.0",
+        "pinia": "^2.1.7"
+    }
+}
