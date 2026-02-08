@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Core\Providers;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Modules\Core\Models\Organization;
 use Modules\Core\Models\Tenant;
@@ -70,7 +71,9 @@ final class CoreServiceProvider extends ServiceProvider
         // Load migrations
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
-        // Register module routes if needed
-        // $this->loadRoutesFrom(__DIR__ . '/../Routes/api.php');
+        // Register module routes with api prefix
+        Route::prefix('api')
+            ->middleware('api')
+            ->group(__DIR__ . '/../Routes/api.php');
     }
 }
