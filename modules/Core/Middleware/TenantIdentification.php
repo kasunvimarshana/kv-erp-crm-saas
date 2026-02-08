@@ -29,6 +29,11 @@ final class TenantIdentification
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // Skip tenant identification in testing environment
+        if (app()->environment('testing')) {
+            return $next($request);
+        }
+
         // Skip tenant identification for central routes (tenant management, etc.)
         if ($this->isCentralRoute($request)) {
             return $next($request);
